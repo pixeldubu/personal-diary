@@ -1,0 +1,55 @@
+body {
+    background-color: #d3e4cd;
+    font-family: "Sour Gummy", sans-serif;
+}
+
+h1, h2 {
+    color: #fdac96;
+}
+
+form label {
+    font-weight: 500;
+}
+
+/* buttons */
+.btn-primary, .dropdown-toggle {
+    --bs-btn-color: white;
+    --bs-btn-bg: #fdac96;
+    --bs-btn-border-color: #fdac96;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: #f7c3b4;
+    --bs-btn-hover-border-color: #f7c3b4;
+    --bs-btn-active-color: white;
+    --bs-btn-active-bg: #fdac96;
+    --bs-btn-active-border-color: #fdac96;
+}
+
+.btn-secondary {
+    --bs-btn-bg: #808080;
+    --bs-btn-border-color: #808080;
+    --bs-btn-hover-bg: #6d6d6d;
+    --bs-btn-hover-border-color: #6d6d6d;
+    --bs-btn-active-bg: #808080;
+    --bs-btn-active-border-color: #808080;
+}
+
+.btn-warning, .btn-success {
+    --bs-btn-color: white;
+    --bs-btn-bg: #a3c686;
+    --bs-btn-border-color: #a3c686;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: #bddaa6;
+    --bs-btn-hover-border-color: #bddaa6;
+    --bs-btn-active-color: white;
+    --bs-btn-active-bg: #a3c686;
+    --bs-btn-active-border-color: #a3c686;
+}
+
+.btn-danger {
+    --bs-btn-bg: #f76c6c;
+    --bs-btn-border-color: #f76c6c;
+    --bs-btn-hover-bg: #e95a5a;
+    --bs-btn-hover-border-color: #e95a5a;
+    --bs-btn-active-bg: #f76c6c;
+    --bs-btn-active-border-color: #f76c6c;
+}

@@ -1,0 +1,107 @@
+<%- include("partials/header.ejs") %>
+
+    <body>
+        <div class="container pt-3">
+            <header class="d-flex justify-content-center py-4">
+                <h1>
+                    <img src="/images/diary.png" alt="Diary">
+                    Pixel Dubu’s Diary
+                </h1>
+            </header>
+        </div>
+
+        <!-- New diary entry form -->
+        <div class="container">
+            <form action="/post" method="POST">
+                <!-- Entry title input (required) -->
+                <div class="mb-3 px-5">
+                    <label for="title" class="form-label">Entry Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Name of entry ✍🏻" required>
+                </div>
+
+                <!-- Entry text input (required) -->
+                <div class="mb-3 px-5">
+                    <label for="entry" class="form-label">Today's Entry</label>
+                    <textarea class="form-control" id="entry" name="entry" rows="3"
+                        placeholder="Your secret is safe with me 🤫" required></textarea>
+                </div>
+
+                <!-- Submit button -->
+                <div class="mb-5 px-5">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Display diary entries if any exist -->
+        <div class="container">
+            <% if (entries.length > 0) { %>
+                <h2 class="d-flex justify-content-center py-4">Diary Entries</h2>
+
+                <% entries.forEach((entry, index) => { %>
+                    <div class="px-5">
+                        <div class="card mb-3">
+                            <div class="card-body">
+
+                                <!-- Entry header (title + actions dropdown) -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Entry title (hidden when editing) -->
+                                    <h5 class="card-title mb-0" id="entry-title-<%= index %>"><%= entry.title %></h5>
+
+                                    <!-- Dropdown menu for actions -->
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <!-- Edit button toggles the edit form -->
+                                            <li>
+                                                <button class="dropdown-item edit-btn" data-index="<%= index %>">📝 Edit</button>
+                                            </li>
+                                            <!-- Delete button submits form with entry index to delete -->
+                                            <li>
+                                                <form action="/delete" method="POST">
+                                                    <input type="hidden" name="index" value="<%= index %>">
+                                                    <button type="submit" class="dropdown-item text-danger">🗑️ Delete</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Entry date -->
+                                <h6 class="card-subtitle text-body-secondary mb-2"><%= entry.date %></h6>
+
+                                <!-- Entry text (hidden when editing) -->
+                                <p class="card-text" id="entry-text-<%= index %>"><%= entry.entry %></p>
+
+                                <!-- Hidden edit form (shown when editing) -->
+                                <form id="edit-form-<%= index %>" action="/edit" method="POST" style="display:none;">
+                                    <input type="hidden" name="index" value="<%= index %>">
+
+                                    <!-- Edited entry title input (required) -->
+                                    <label for="title" class="mb-2">Entry Title</label>
+                                    <input type="text" name="title" value="<%= entry.title %>" class="form-control mb-2" required>
+
+                                    <!-- Edited entry text input (required) -->
+                                    <label for="entry" class="mb-2">Your Entry</label>
+                                    <textarea name="entry" class="form-control mb-2" required><%= entry.entry %></textarea>
+
+                                    <!-- Save and Cancel buttons -->
+                                    <button type="submit" class="btn btn-success btn-sm">Save</button>
+                                    <button type="button" class="btn btn-secondary btn-sm cancel-btn" data-index="<%= index %>">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+
+        <!-- JS imports: Bootstrap, jQuery, and custom script -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="/js/main.js"></script>
+        
+    </body>
+</html>
